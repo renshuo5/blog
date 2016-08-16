@@ -37,10 +37,33 @@ var addTabs = function (options) {
   //设置导航菜单选中的颜色
   $("#"+menuliId).addClass("active");
   
+//监听右键事件，创建右键菜单
+//  $("#tab_" + id).bind("contextmenu",function(event){
+//      var pageX = event.pageX;//鼠标单击的x坐标
+//      var pageY = event.pageY;//鼠标单击的y坐标
+//      //获取菜单
+//      var contextMenu = $("#tab_" + id);
+//      var cssObj = {
+//        top:pageY+"px",//设置菜单离页面上边距离，top等效于y坐标
+//        left:pageX+"px"//设置菜单离页面左边距离，left等效于x坐标
+//      };
+//      //判断横向位置（pageX）+自定义菜单宽度之和，如果超过页面宽度及为溢出，需要特殊处理；
+////      var menuWidth = contextMenu.width();
+////      var pageWidth = $(document).width();
+////      console.log("pageX"+pageX+"menuWidth"+menuWidth+":pageWidth"+pageWidth);
+////      if(pageX+contextMenu.width()>pageWidth){
+////        cssObj.left = pageWidth-menuWidth-5+"px"; //-5是预留右边一点空隙，距离右边太紧不太美观；
+////      }
+//      //设置菜单的位置
+//      $("#context_menu").css(cssObj).show();//显示使用淡入效果,比如不需要动画可以使用show()替换;
+//      
+//      event.preventDefault();//阻止浏览器与事件相关的默认行为；此处就是弹出右键菜单
+//    });
+  
 };
 var closeTab = function (id) {
   //如果关闭的是当前激活的TAB，激活他的前一个TAB
-  if ($("li.active").attr('id') == "tab_" + id) {
+  if ($("#open_nav_tabs li.active").attr('id') == "tab_" + id) {
     $("#tab_" + id).prev().addClass('active');
     $("#" + id).prev().addClass('active');
   }
@@ -65,26 +88,5 @@ $(function () {
     id = $(this).attr("tabclose");
     closeTab(id);
   });
-  //监听右键事件，创建右键菜单
   
-  $(document).on("contextmenu",function(event){
-      var pageX = event.pageX;//鼠标单击的x坐标
-      var pageY = event.pageY;//鼠标单击的y坐标
-      //获取菜单
-      var contextMenu = $("#contextMenu");
-      var cssObj = {
-        top:pageY+"px",//设置菜单离页面上边距离，top等效于y坐标
-        left:pageX+"px"//设置菜单离页面左边距离，left等效于x坐标
-      };
-      //判断横向位置（pageX）+自定义菜单宽度之和，如果超过页面宽度及为溢出，需要特殊处理；
-      var menuWidth = contextMenu.width();
-      var pageWidth = $(document).width();
-      if(pageX+contextMenu.width()>pageWidth){
-        cssObj.left = pageWidth-menuWidth-5+"px"; //-5是预留右边一点空隙，距离右边太紧不太美观；
-      }
-      //设置菜单的位置
-      $("#contextMenu").css(cssObj).stop().fadeIn(200);//显示使用淡入效果,比如不需要动画可以使用show()替换;
-      
-      event.preventDefault();//阻止浏览器与事件相关的默认行为；此处就是弹出右键菜单
-    });
 });
