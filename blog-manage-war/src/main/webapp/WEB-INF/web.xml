@@ -116,7 +116,7 @@
 	
 	<error-page>
 		<exception-type>java.lang.NullException</exception-type>
-		<location>/views/404.ftl</location>
+		<location>/ftl/404.ftl</location>
 	</error-page>
   	
 </web-app>

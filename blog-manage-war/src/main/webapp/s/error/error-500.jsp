@@ -39,7 +39,7 @@ A:hover {
 <P>　</P>
 <DIV align=center>
 <TABLE height=257 cellSpacing=0 cellPadding=0 width=306 
-background="404/404.jpg" border=0>
+background="<%=path %>/s/error/error.jpg" border=0>
   <TBODY>
   <TR>
     <TD vAlign=top background=""><BR>

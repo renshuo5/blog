@@ -1,6 +1,6 @@
 
 <!-- basic styles -->
-<link href="${rc.contextPath}/s/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="s/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="${rc.contextPath}/s/assets/css/font-awesome.min.css" />
 <link rel="stylesheet" href="${rc.contextPath}/s/css/page.css" />
 

@@ -14,9 +14,6 @@ public class ManageController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String manage(Model model){
-		//判断user是否登录
-		
-		
 		return "index";
 	}
 
