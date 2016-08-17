@@ -21,7 +21,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    
   </dependencies>
+  
   <modules>
     <module>blog-user-war</module>
     <module>blog-manage-war</module>
