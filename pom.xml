@@ -28,5 +28,6 @@
   <modules>
     <module>blog-user-war</module>
     <module>blog-manage-war</module>
+    <module>blog-model</module>
   </modules>
 </project>
