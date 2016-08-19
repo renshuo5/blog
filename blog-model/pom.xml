@@ -26,5 +26,17 @@
 		<artifactId>core-frame</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
+    <dependency>
+    	<groupId>com.rs.test</groupId>
+		<artifactId>model-frame</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+    	<groupId>org.projectlombok</groupId>
+    	<artifactId>lombok</artifactId>
+    	<version>1.16.6</version>
+    </dependency>
   </dependencies>
 </project>
