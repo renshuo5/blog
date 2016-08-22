@@ -29,7 +29,7 @@
     
     <dependency>
     	<groupId>com.rs.test</groupId>
-		<artifactId>model-frame</artifactId>
+		<artifactId>model-jar</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
     </dependency>
     

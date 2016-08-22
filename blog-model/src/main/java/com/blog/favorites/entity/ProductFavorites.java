@@ -37,14 +37,14 @@ public class ProductFavorites extends TimeEntity implements Auditable<ProductFav
 	private Long memberId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name="member_id",nullable=false)
+	@JoinColumn(name="memberId",nullable=false)
 	private Member member;
 	
 	@Column(insertable=false,updatable=false,nullable=false)
 	private Long productId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name="product_id",nullable=false)
+	@JoinColumn(name="productId",nullable=false)
 	private Product product;
 	
 	private boolean active;

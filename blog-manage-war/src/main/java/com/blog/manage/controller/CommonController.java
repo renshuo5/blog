@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.rs.user.entity.User;
+import com.model.entity.User;
 import com.rs.user.model.LoginInfo;
 import com.rs.user.service.UserService;
 

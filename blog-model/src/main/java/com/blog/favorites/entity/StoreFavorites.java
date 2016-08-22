@@ -19,7 +19,7 @@ import com.rensframework.core.entity.TimeEntity;
 
 @Entity
 @Table(indexes = { @Index(columnList = "memberId"),
-		@Index(columnList = "productId") })
+		@Index(columnList = "storeId") })
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class StoreFavorites extends TimeEntity implements Auditable<StoreFavorites>{
@@ -33,14 +33,14 @@ public class StoreFavorites extends TimeEntity implements Auditable<StoreFavorit
 	private Long memberId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name="member_id",nullable=false)
+	@JoinColumn(name="memberId",nullable=false)
 	private Member member;
 	
 	@Column(insertable=false,updatable=false,nullable=false)
 	private Long storeId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name="store_id",nullable=false)
+	@JoinColumn(name="storeId",nullable=false)
 	private Store store;
 	
 	private boolean active;

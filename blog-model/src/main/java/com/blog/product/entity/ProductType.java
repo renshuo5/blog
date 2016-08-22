@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.blog.store.entity.StoreType;
 import com.rensframework.core.entity.Auditable;
 import com.rensframework.core.entity.TimeEntity;
 
@@ -34,12 +33,12 @@ public class ProductType extends TimeEntity implements Auditable<ProductType> {
 	@Column(nullable = false, length = 64)
 	private String name;
 	
+	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
+	@JoinColumn(name = "parentId")
+	private ProductType parent;
+	
 	@Column(insertable=false,updatable=false,nullable=true)
 	private Long parentId;
-	
-	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name = "parent_id")
-	private ProductType parent;
 	
 	@OneToMany(mappedBy="parent",fetch=FetchType.LAZY)
 	@OrderBy("seqNum")

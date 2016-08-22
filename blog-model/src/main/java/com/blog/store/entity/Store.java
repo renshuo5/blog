@@ -34,15 +34,21 @@ public class Store extends TimeEntity implements Auditable<Store> {
 	private Long memberId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", nullable = false)
+	@JoinColumn(name = "memberId", nullable = false)
 	private Member member;
 	
-	@Column(name="storeType_id",insertable=false,updatable=false,nullable=true)
+	@Column(insertable=false,updatable=false,nullable=true)
 	private Long storeTypeId;
 	
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
-	@JoinColumn(name="storeType_id",nullable=false)
+	@JoinColumn(name="storeTypeId",nullable=false)
 	private StoreType storeType;
+	
+	@Column(nullable = false)
+	private boolean active=true;
+	
+	@Column(nullable = false)
+	private boolean removed=false;
 	
 	public String getEntityName() {
 		return "店铺";

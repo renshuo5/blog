@@ -31,7 +31,7 @@ public class ReceiptAddr extends TimeEntity implements Auditable<ReceiptAddr> {
 	private Long memberId;
 	
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
-	@JoinColumn(name="member_id",nullable=false)
+	@JoinColumn(name="memberId",nullable=false)
 	private Member member;
 	
 	private String address;

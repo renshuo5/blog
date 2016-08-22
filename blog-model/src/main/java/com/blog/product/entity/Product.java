@@ -39,7 +39,7 @@ public class Product extends TimeEntity implements Auditable<Product> {
 	/**
 	 * 描述		
 	 */
-	private String desc;
+	private String proDesc;
 	
 	/**
 	 * 商店
@@ -48,20 +48,26 @@ public class Product extends TimeEntity implements Auditable<Product> {
 	private Long storeId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name="store_id")
+	@JoinColumn(name="storeId")
 	@NotNull
 	private Store store;
 
 	/**
 	 * 商品类型
 	 */
-	@Column(name="productType_id",insertable=false,updatable=false,nullable=true)
+	@Column(insertable=false,updatable=false,nullable=true)
 	private Long productTypeId;
 	
 	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.LAZY)
-	@JoinColumn(name="productType_id")
+	@JoinColumn(name="productTypeId")
 	@NotNull
 	private ProductType productType;
+	
+	@Column(nullable = false)
+	private boolean active=true;
+	
+	@Column(nullable = false)
+	private boolean removed=false;
 	
 	public String getEntityName() {
 		return null;
