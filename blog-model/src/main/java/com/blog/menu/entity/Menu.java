@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,9 +30,13 @@ public class Menu extends TimeEntity implements Auditable<Menu> {
 	 * 
 	 */
 	private static final long serialVersionUID = -2026984039439924209L;
-
 	
+	@Column(length=64)
+	@NotNull
 	private String name;
+	@Column(length=200)
+	@NotNull
+	private String url;
 	
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
 	@JoinColumn(name = "parentId")
