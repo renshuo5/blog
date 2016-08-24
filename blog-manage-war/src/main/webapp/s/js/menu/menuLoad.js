@@ -1,10 +1,14 @@
 $(function () {
 			$.ajax({
 				 type: "GET",
-	             url: "/manage/navigation",
+	             url: "manage/menu/navigation",
 	             dataType: "json",
 	             success: function(data){
-	                         
+	            	 console.log(data);
+	             },
+	             error:function(data){
+	            	 
+	            	 console.log(data);
 	             }
 			});
 			

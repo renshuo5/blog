@@ -1,5 +1,6 @@
 package com.blog.menu.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import com.rensframework.core.entity.Auditable;
 import com.rensframework.core.entity.TimeEntity;
@@ -23,7 +25,8 @@ import com.rensframework.core.entity.TimeEntity;
 @Entity
 @Table
 @Data
-@EqualsAndHashCode(callSuper=false)
+@ToString(exclude = { "parent", "children" })
+@EqualsAndHashCode(callSuper=false,exclude = { "parent", "children" })
 public class Menu extends TimeEntity implements Auditable<Menu> {
 
 	/**
@@ -35,7 +38,6 @@ public class Menu extends TimeEntity implements Auditable<Menu> {
 	@NotNull
 	private String name;
 	@Column(length=200)
-	@NotNull
 	private String url;
 	
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
@@ -45,9 +47,9 @@ public class Menu extends TimeEntity implements Auditable<Menu> {
 	@Column(insertable=false,updatable=false,nullable=true)
 	private Long parentId;
 	
-	@OneToMany(mappedBy="parentId",cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="parentId",cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@OrderBy("seqNum")
-	private Set<Menu> children;
+	private Set<Menu> children = new HashSet<Menu>();
 	
 	private Integer seqNum;
 	

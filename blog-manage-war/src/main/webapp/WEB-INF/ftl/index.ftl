@@ -1560,7 +1560,7 @@
 		<#include "include_bootstrap_js.ftl">
 		<!-- inline scripts related to this page -->
 		
-		<script src="${rc.contextPath}/manage/menu"></script>
+		<script src="${rc.contextPath}/s/js/menu/menuLoad.js"></script>
 		
 		<script type="text/javascript">
 		
