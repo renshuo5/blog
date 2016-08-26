@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Controller
-@RequestMapping("/manage/menu/")
+@RequestMapping("/manage/menu")
 public class MenuController {
 
 	
@@ -80,7 +80,7 @@ public class MenuController {
 		return "menu/list";
 	}
 	
-	@RequestMapping(value="form" ,method=RequestMethod.GET)
+	@RequestMapping(value="/form" ,method=RequestMethod.GET)
 	public String form(Menu menu,Model model){
 		if(menu==null){
 			menu = new Menu();

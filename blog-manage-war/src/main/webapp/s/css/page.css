@@ -1,3 +1,13 @@
 #dropdown-menu{
 	display:none;
 }
+
+article, aside, figure, footer, header, hgroup, 
+menu, nav, section { display: block; }
+.west{
+  width:200px;
+  padding:10px;
+}
+.north{
+  height:100px;
+}

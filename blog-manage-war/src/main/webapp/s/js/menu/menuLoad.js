@@ -1,122 +1,109 @@
-$(function () {
-			$.ajax({
-				 type: "GET",
-	             url: "manage/menu/navigation",
-	             dataType: "json",
-	             success: function(data){
-	            	 console.log(data);
-	             },
-	             error:function(data){
-	            	 
-	            	 console.log(data);
-	             }
+$(function() {
+	// 动态菜单数据
+	var treeData = [ {
+		text : "菜单",
+		children : [ {
+			text : "菜单管理",
+			attributes : {
+				url : "manage/menu"
+			}
+		}, {
+			text : "新闻管理",
+			attributes : {
+				url : ""
+			}
+		}, {
+			text : "一级菜单3",
+			state : "closed",
+			children : [ {
+				text : "二级菜单1",
+				attributes : {
+					url : ""
+				}
+			}, {
+				text : "二级菜单2",
+				attributes : {
+					url : ""
+				}
+			}, {
+				text : "二级菜单3",
+				attributes : {
+					url : ""
+				}
+			} ]
+		} ]
+	} ];
+
+	// 实例化树形菜单
+	$("#tree").tree({
+		data : treeData,
+		lines : true,
+		onClick : function(node) {
+			if (node.attributes) {
+				Open(node.text, node.attributes.url);
+			}
+		}
+	});
+	// 在右边center区域打开菜单，新增tab
+	function Open(text, url) {
+		if ($("#tabs").tabs('exists', text)) {
+			$('#tabs').tabs('select', text);
+		} else {
+			$('#tabs').tabs('add', {
+				title : text,
+				href : url,
+				closable : true
+
 			});
-			
-		    $('#menu').sidebarMenu({
-		        data: [{
-		          id: '1',
-		          text: '系统设置',
-		          icon: 'icon-cog',
-		          url: '',
-		          menus: [{
-		            id: '11',
-		            text: '编码管理',
-		            icon: 'icon-glass',
-		            url: '/CodeType/Index'
-		          }]
-		        }, {
-		          id: '2',
-		          text: '基础数据',
-		          icon: 'icon-leaf',
-		          url: '',
-		          menus: [{
-		            id: '21',
-		            text: '基础特征',
-		            icon: 'icon-glass',
-		            url: '/BasicData/BasicFeature/Index'
-		          }, {
-		            id: '22',
-		            text: '特征管理',
-		            icon: 'icon-glass',
-		            url: '/BasicData/Features/Index'
-		          }, {
-		            id: '23',
-		            text: '物料维护',
-		            icon: 'icon-glass',
-		            url: '/Model/Index'
-		          }, {
-		            id: '24',
-		            text: '站点管理',
-		            icon: 'icon-glass',
-		            url: '/Station/Index'
-		          }]
-		        }, {
-		          id: '3',
-		          text: '权限管理',
-		          icon: 'icon-user',
-		          url: '',
-		          menus: [{
-		            id: '31',
-		            text: '用户管理',
-		            icon: 'icon-user',
-		            url: '/SystemSetting/User'
-		          }, {
-		            id: '32',
-		            text: '角色管理',
-		            icon: 'icon-apple',
-		            url: '/SystemSetting/Role'
-		          }, {
-		            id: '33',
-		            text: '菜单管理',
-		            icon: 'icon-list',
-		            url: '/SystemSetting/Menu'
-		          }, {
-		            id: '34',
-		            text: '部门管理',
-		            icon: 'icon-glass',
-		            url: '/SystemSetting/Department'
-		          }]
-		        }, {
-		          id: '4',
-		          text: '订单管理',
-		          icon: 'icon-envelope',
-		          url: '',
-		          menus: [{
-		            id: '41',
-		            text: '订单查询',
-		            icon: 'icon-glass',
-		            url: '/Order/Query'
-		          }, {
-		            id: '42',
-		            text: '订单排产',
-		            icon: 'icon-glass',
-		            url: '/Order/PLANTPRODUCT'
-		          }, {
-		            id: '43',
-		            text: '订单撤排',
-		            icon: 'icon-glass',
-		            url: '/Order/cancelPRODUCT'
-		          }, {
-		            id: '44',
-		            text: '订单HOLD',
-		            icon: 'icon-glass',
-		            url: '/Order/hold'
-		          }, {
-		            id: '45',
-		            text: '订单删除',
-		            icon: 'icon-glass',
-		            url: '/Order/delete'
-		          }, {
-		            id: '47',
-		            text: '订单插单',
-		            icon: 'icon-glass',
-		            url: '/Order/insertorder'
-		          }, {
-		            id: '48',
-		            text: '订单导入',
-		            icon: 'icon-glass',
-		            url: '/Order/Import'
-		          }]
-		        }]
-		      });
-		    });
+		}
+	}
+
+	// 绑定tabs的右键菜单
+	$("#tabs").tabs({
+		onContextMenu : function(e, title) {
+			e.preventDefault();
+			$('#tabsMenu').menu('show', {
+				left : e.pageX,
+				top : e.pageY
+			}).data("tabTitle", title);
+		}
+	});
+
+	// 实例化menu的onClick事件
+	$("#tabsMenu").menu({
+		onClick : function(item) {
+			CloseTab(this, item.name);
+		}
+	});
+
+	// 几个关闭事件的实现
+	function CloseTab(menu, type) {
+		var curTabTitle = $(menu).data("tabTitle");
+		var tabs = $("#tabs");
+		if (type === "close") {
+			if (curTabTitle != "首页") {
+				tabs.tabs("close", curTabTitle);
+				return;
+			} else {
+				$.messager.alert('提示', '首页不能删除啦');
+			}
+		}
+
+		var allTabs = tabs.tabs("tabs");
+		var closeTabsTitle = [];
+
+		$.each(allTabs, function() {
+			var opt = $(this).panel("options");
+			if (opt.closable && opt.title != curTabTitle && type === "Other") {
+				closeTabsTitle.push(opt.title);
+			} else if (opt.closable && type === "All") {
+
+				closeTabsTitle.push(opt.title);
+			}
+		});
+		console.log(closeTabsTitle);
+		for (var i = 0; i < closeTabsTitle.length; i++) {
+			tabs.tabs("close", closeTabsTitle[i]);
+		}
+	}
+});
